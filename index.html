@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>模态框弹出层</title>
+<link rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css">
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<div class="container">
+
+	<div class="row main">
+		<div class="col-md-12">
+			<div class="optlist">
+				<a class="btn btn-info btn-lg show-layer" data-show-layer="hw-layer" >点击弹出层</a>
+			</div>
+			
+			
+			<div class="hw-overlay" id="hw-layer">
+				<div class="content-hidden">
+				<div class="hw-layer-wrap">
+					<div class="row">
+
+						<div class="col-md-12 col-sm-12">
+							<h4>纯粹的弹出层</h4>
+							<p>这是HTML+CSS+Javascript实现的一个弹出层效果，采用了响应式布局，希望玩的开心！</p>
+
+							<button class="btn btn-success hwLayer-ok">确 定</button>
+							<button class="btn btn-warning hwLayer-cancel">取 消</button>
+						</div>
+					</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+</div>
+<script src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+$(function(){
+	//弹出层
+	function showLayer(id){
+		var layer = $('#'+id),
+			layerwrap = layer.find('.hw-layer-wrap');
+		layer.fadeIn();
+
+	}
+
+	//隐藏层
+	function hideLayer(){
+		$('.hw-overlay').fadeOut();
+	}
+	//绑定按钮
+	$('.hwLayer-ok,.hwLayer-cancel,.hwLayer-close').on('click', function() {
+		hideLayer();
+	});
+
+	//触发弹出层
+	$('.show-layer').on('click',  function() {
+		var layerid = $(this).data('show-layer');
+		showLayer(layerid);
+	});
+
+	//点击或者触控弹出层外的半透明遮罩层，关闭弹出层
+	$('.hw-overlay').on('click',  function(event) {
+		if (event.target == this){
+			hideLayer();
+		}
+	});
+
+	//按ESC键关闭弹出层
+	$(document).keyup(function(event) {
+		if (event.keyCode == 27) {
+			hideLayer();
+		}
+	});
+});
+</script>
+</body>
+</html>
